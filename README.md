@@ -25,11 +25,12 @@ Go to your SuperCollider App. Alt/right + click > show package contetes. Then na
 Contents > Resources > SCClassLibrary > JITLib > ProxySpace > Replace wrapForNodeProxy.sc
 
 ### In SuperCollider:
+Install JITLibExtensions:
 ```supercollider
-Quarks.gui;
+"JITLibExtensions".include;
 ```
-Search for OpenBCI + JitlibExtensions and add it.
-Then install OpenBCI port for SuperCollider
+Install OpenBCI port for SuperCollider
+
 ```supercollider
 //install
 Quarks.fetchDirectory
