@@ -261,7 +261,7 @@ s.waitForBoot{
 		}, '/util/reload');
 
 		// Parameter Plot
-		plots = Array.zeroFill(2);
+		plots = [0.0, 0.0];
 		param_bufs = Array.fill(proxychains.size, nil);
 		proxychains.do({ |proxychain, index|
 
