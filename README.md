@@ -1,7 +1,7 @@
 # EEGsuperMap
 
 ## Installation
-
+Install SuperCollider:
 
 Copy the superMapExtensions Folder into your SuperCollider Extensions Folder in your library:
 
@@ -31,5 +31,5 @@ Quarks.gui;
 Search for OpenBCI + JitlibExtensions and add it.
 
 ### Recompile SC Class Library
-Hit ⌘ + ⇧ + L or Language > Recompile Class Library
+Hit ⌘ + ⇧ + L or go to Language > Recompile Class Library
 
