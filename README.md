@@ -14,6 +14,13 @@ You can also find it in SuperCollider with
 Platform.userExtensionDir
 ```
 
+The folder might not exist, so you may need to create it yourself. You can do this in your operating system's file
+explorer or from within SuperCollider by evaluating:
+
+```supercollider
+File.mkdir(Platform.userExtensionDir)
+```
+
 Go to your SuperCollider App. Alt/right + click > show package contetes. Then navigate to:
 Contents > Resources > SCClassLibrary > JITLib > ProxySpace > Replace wrapForNodeProxy.sc
 
