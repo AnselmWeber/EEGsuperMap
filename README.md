@@ -29,6 +29,14 @@ Contents > Resources > SCClassLibrary > JITLib > ProxySpace > Replace wrapForNod
 Quarks.gui;
 ```
 Search for OpenBCI + JitlibExtensions and add it.
+Then install OpenBCI port for SuperCollider
+```supercollider
+//install
+Quarks.fetchDirectory
+Quarks.install("OpenBCI-SuperCollider")
+//recompile
+OpenBCI.openHelpFile
+```
 
 ### Recompile SC Class Library
 Hit ⌘ + ⇧ + L or go to Language > Recompile Class Library
