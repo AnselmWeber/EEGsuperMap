@@ -38,4 +38,3 @@ Ndef(\mix).play;
 ~superMap.(\neu2);
 )
 
-s.meter;
