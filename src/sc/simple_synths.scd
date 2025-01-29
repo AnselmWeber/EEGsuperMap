@@ -1,6 +1,5 @@
 // Boot Server
 
-s.reboot;
 
 // Play Some Synth to Control them with EEsuperMap
 (
@@ -31,10 +30,12 @@ Ndef(\bass, { |width = 4, freq = 100, rq = 5|
 	snd * 0.25;
 
 });
+
 Ndef(\mix, {(Ndef(\blips).ar + Ndef(\bass).ar).tanh * 0.5});
 Ndef(\mix).play;
 
 // Start EEGsuperMap
-~superMap.(\neu);
+~superMap.(\neu2);
 )
 
+s.meter;

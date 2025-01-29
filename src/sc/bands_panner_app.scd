@@ -53,7 +53,13 @@
 		~bandsBuffer= {Array.fill(bands.size, {Array.fill(fps, {0})})}.dup(board.numChannels);  //1sec
 		Ndef(\data_bandpower).reshaping = \elastic;
 
-		Ndef(\data_bandpower, { |delta = #[0,0, 0, 0], thetha = #[0, 0, 0, 0], alpha = #[0, 0, 0, 0], beta = #[0, 0, 0, 0], gamma = #[0, 0, 0, 0]|
+		Ndef(\data_bandpower, {|
+			delta = #[0,0, 0, 0],
+			thetha = #[0, 0, 0, 0],
+			alpha = #[0, 0, 0, 0],
+			beta = #[0, 0, 0, 0],
+			gamma = #[0, 0, 0, 0]|
+
 			var tr, bands, sig;
 			tr = Trig.ar(\trigger.tr(0), SampleDur.ir);
 			sig = Demand.ar(tr, 0, [delta, thetha, alpha, beta, gamma].flat);
@@ -347,10 +353,12 @@
 		Spec.add(\channel, [0, 3, \lin, 1, 0]);
 		Spec.add(\focus, [0.0, 1.0, \lin, 0.01, 0]);
 
-
 		// Buffer for Waveshaping input signal
 		t = Buffer.alloc(s, 200, 1, bufnum: 70);
 
+		/////////////////////////////////////////////////////////////////////////////////////////
+		///////////////////////////////////////// CHAIN /////////////////////////////////////////
+		/////////////////////////////////////////////////////////////////////////////////////////
 		ProxyDictChain.add(
 
 			\chPan, \mix -> { |band =  2, channel = 1, focus = 0|
@@ -441,8 +449,8 @@
 
 		~app.(proxychains: [d], tbuf: t);
 		~bandpower.();
-
 	};
-}
+};
+s.reboot;
 )
 
