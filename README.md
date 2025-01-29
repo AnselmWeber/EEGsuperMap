@@ -3,6 +3,32 @@
 ## Install
 Install [SuperCollider](https://supercollider.github.io/)
 
+### In SuperCollider:
+
+Install JITLibExtensions:
+```supercollider
+"JITLibExtensions".include;
+```
+Sometimes this doesn't work, which shows when recompiling the class library (see last step).
+
+I that is the case just copy the JITLibExtensions from the install folder to:
+
+```
+/Users/*yourusername*/Library/Application Support/SuperCollider/downloaded-quarks
+```
+
+Install OpenBCI port for SuperCollider
+
+```supercollider
+//install
+Quarks.fetchDirectory
+Quarks.install("OpenBCI-SuperCollider")
+//recompile
+OpenBCI.openHelpFile
+```
+
+### superMapCode
+
 Copy the superMapExtensions folder from src/sc into your SuperCollider Extensions folder in your library:
 
 ```
@@ -25,29 +51,6 @@ Go to your SuperCollider App. Alt/right + click > show package contetes. Then na
 Contents > Resources > SCClassLibrary > JITLib > ProxySpace
 There replace wrapForNodeProxy.sc with the one in the src/sc folder from this repo.
 
-### In SuperCollider:
-
-Install OpenBCI port for SuperCollider
-
-```supercollider
-//install
-Quarks.fetchDirectory
-Quarks.install("OpenBCI-SuperCollider")
-//recompile
-OpenBCI.openHelpFile
-```
-
-Install JITLibExtensions:
-```supercollider
-"JITLibExtensions".include;
-```
-Sometimes this doesn't work, which shows when recompiling the class library (see next step).
-
-I that is the case just copy the JITLibExtensions from the install folder to:
-
-```
-/Users/*yourusername*/Library/Application Support/SuperCollider/downloaded-quarks
-```
 
 ### Recompile SC Class Library
 Hit ⌘ + ⇧ + L or go to Language > Recompile Class Library

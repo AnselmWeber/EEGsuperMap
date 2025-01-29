@@ -1,5 +1,6 @@
 // App Funktion
 
+
 (
 ~superMap = {
 	//////////////////////////////////////////// input parameter function ////////////////////////////////////////////
@@ -16,10 +17,12 @@
 			["BETA", 13, 30],
 			["GAMMA", 30, 55]´
 		];
-		var board= SyntheticData(4, 200, initAction: {|b| b.start});  //edit here to match your board
+		//edit here to match your board
+		//var board= OSCDataGUI(4, 200, initAction: {|b| b.start});
+		var board = SyntheticData(4, 200, initAction: {|b| b.start});
 
 		var notchFilters, bandpassFilters, smoothingFilters;
-		var fft= DataFFT(board, 256);
+		var fft= DataFFT(board, 128);
 		var fps= 60;
 		var usr, pop1, btn1, btn2, pw, po;
 		var verticalScale= #[0.1, 1, 10, 100];
@@ -161,7 +164,7 @@
 		.items_(#["0.0", "0.5", "0.75", "0.9", "0.95", "0.98"])
 		.action_{|v|
 			smoothingFilters= {DataSmoothing(v.item.asFloat)}.dup(board.numChannels);
-		}.valueAction_(3);
+		}.valueAction_(0);
 		btn1= Button(win, Rect((pw+2)+po, 20, pw/2, 20)).states_(
 			[["Off"]]++DataFilterNotch.keys.collect{|x| [x.asString+"Hz"]}
 		).action_{|v|
@@ -288,7 +291,7 @@
 				}).play;
 			});
 
-			parent_w = Window.new("Window", bounds: Rect(0, 0, 1280, 720)).front;
+			parent_w = Window.new("Window", bounds: Rect(0, 0, 1280, 320)).front;
 			parent_w.bounds.left = 0;
 			parent_w.bounds.top = 0;
 			parent_w.addFlowLayout(2@2, 0@0);
@@ -420,7 +423,8 @@
 		d.clear;
 		c.clear;
 		//d.clear;
-		d = ProxyDictChain(\neu123, [\scale, \rawout, \shape, \out]);
+		d = ProxyDictChain(\adv123, [\scale, \rawout, \shape, \out]);
+		//e = ProxyDictChain(\test124, [\scale, \rawout, \shape, \out]);
 
 		~app.(proxychains: [d], tbuf: t);
 		~bandpower.();
