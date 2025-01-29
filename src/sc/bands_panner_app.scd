@@ -2,7 +2,7 @@
 
 
 (
-~superMap = {
+~superMap = { |chain_name|
 	//////////////////////////////////////////// input parameter function ////////////////////////////////////////////
 
 	~bands =  [\delta, \thetha, \alpha, \beta, \gamma];
@@ -393,7 +393,18 @@
 				out;
 			},
 
-			\rawout, \split -> { |in, rawout| in.asArray[0] * 1 },
+			\range, \filter -> { |in|
+				var min, max, scaled;
+				in = in.asArray[0] * 1 ;
+				min = RunningMin.ar(in, 0.999); // Langsame Anpassung an das Minimum
+				max = RunningMax.ar(in, 0.999); // Langsame Anpassung an das Maximum
+
+				// Normierung auf [0,1], aber sicherstellen, dass max > min bleibt
+				scaled = (in - min) / (max - min + 0.0001); // Kleine Konstante verhindert Division durch Null
+
+				scaled
+
+			},
 
 			\shape, \split -> { |in, amp = 1, shape|
 				// Index into the table with raw Signal
@@ -403,7 +414,7 @@
 			\out, \filter -> { |in|
 				var phase, rate;
 				in = in.asArray[0];
-				rate = 44100 / (1024 * 0.5);
+				rate = SampleRate.ir / (1024 * 0.5);
 				phase = Phasor.ar(0, 1 / rate, 0, 1024);
 				BufWr.ar(in, 50, phase);
 				in;
@@ -412,7 +423,7 @@
 			\out2, \filter -> { |in|
 				var phase, rate;
 				in = in.asArray[0];
-				rate = 44100 / (1024 * 0.5);
+				rate = SampleRate.ir / (1024 * 0.5);
 				phase = Phasor.ar(0, 1 / rate, 0, 1024);
 				BufWr.ar(in, 51, phase);
 				in;
@@ -423,7 +434,9 @@
 		d.clear;
 		c.clear;
 		//d.clear;
-		d = ProxyDictChain(\adv123, [\scale, \rawout, \shape, \out]);
+		chain_name = chain_name.asString.replace("_").asSymbol;
+
+		d = ProxyDictChain(chain_name, [\scale, \range, \shape, \out]);
 		//e = ProxyDictChain(\test124, [\scale, \rawout, \shape, \out]);
 
 		~app.(proxychains: [d], tbuf: t);
@@ -432,3 +445,4 @@
 	};
 }
 )
+
